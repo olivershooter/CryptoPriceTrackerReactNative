@@ -1,13 +1,13 @@
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { StyleSheet, View } from "react-native";
-
-import HomeScreen from "./src/screen/HomeScreen";
-import CoinDetailScreen from "./src/screen/CoinDetailScreen";
+import CoinDetailedScreen from './src/screens/CoinDetailedScreen';
+import HomeScreen from './src/screens/HomeScreen';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <CoinDetailScreen />
+      <CoinDetailedScreen />
       <StatusBar style="light" />
     </View>
   );
