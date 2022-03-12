@@ -3,6 +3,7 @@ import { View, Text, Image } from "react-native";
 import { Ionicons, EvilIcons } from "@expo/vector-icons";
 import styles from "./styles";
 
+//image, symbol, and marketCapRank coming from CoinDetailedScreen
 const CoinDetailedHeader = (props) => {
   const { image, symbol, marketCapRank } = props;
   return (
