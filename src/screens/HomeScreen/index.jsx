@@ -6,8 +6,7 @@ import cryptocurrencies from "../../../assets/data/cryptocurrencies.json";
 const HomeScreen = () => {
   return (
     //Flatlist with the data for the home screen
-    //functions coming from their components
-    //passing in the params are the JSON dummy data
+    //the params are the data from the json, parsed via the named function
     <FlatList
       data={cryptocurrencies}
       renderItem={({ item }) => <CoinItem marketCoin={item} />}

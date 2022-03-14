@@ -11,6 +11,8 @@ import {
   ChartYLabel,
 } from "@rainbow-me/animated-charts";
 
+//values coming from the crypto json
+//can parse data further with the {}
 const CoinDetailedScreen = () => {
   const {
     image: { small },
@@ -27,11 +29,17 @@ const CoinDetailedScreen = () => {
   const [coinValue, setCoinValue] = useState("1");
   const [usdValue, setUsdValue] = useState(current_price.usd.toString());
 
+  //the colour of the percentage changes based on if it's below 0 or above 0
+  //read like: if the price_change_percentage_24h is less than 0, then make the colour ea3943
+  //otherwise if price_change_percentage_24h is more than 0, then make the colour 16c784
   const percentageColor =
     price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
 
+  //changing the colour of the chart with the same formula as above
+  //the prices[0][1] is the plotting marks (X,Y)
   const chartColor = current_price.usd > prices[0][1] ? "#16c784" : "#ea3943";
 
+  //needed for the @rainbow-me/animated-charts
   const screenWidth = Dimensions.get("window").width;
 
   const formatCurrency = (value) => {
@@ -44,14 +52,14 @@ const CoinDetailedScreen = () => {
 
   const changeCoinValue = (value) => {
     setCoinValue(value);
-    const floatValue = parseFloat(value.replace(',', '.')) || 0
-    setUsdValue((floatValue * current_price.usd).toString())
+    const floatValue = parseFloat(value.replace(",", ".")) || 0;
+    setUsdValue((floatValue * current_price.usd).toString());
   };
 
   const changeUsdValue = (value) => {
     setUsdValue(value);
-    const floatValue = parseFloat(value.replace(',', '.')) || 0
-    setCoinValue((floatValue / current_price.usd).toString())
+    const floatValue = parseFloat(value.replace(",", ".")) || 0;
+    setCoinValue((floatValue / current_price.usd).toString());
   };
 
   return (

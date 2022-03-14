@@ -4,6 +4,7 @@ import { Ionicons, EvilIcons } from "@expo/vector-icons";
 import styles from "./styles";
 
 //image, symbol, and marketCapRank coming from CoinDetailedScreen
+//this is just for the header of the screen
 const CoinDetailedHeader = (props) => {
   const { image, symbol, marketCapRank } = props;
   return (
