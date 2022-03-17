@@ -26,6 +26,8 @@ const CoinDetailedScreen = () => {
     },
   } = Coin;
 
+  //props is the data coming from outside, state is the data the components is responsible for
+  //for the price converter function
   const [coinValue, setCoinValue] = useState("1");
   const [usdValue, setUsdValue] = useState(current_price.usd.toString());
 
@@ -42,18 +44,24 @@ const CoinDetailedScreen = () => {
   //needed for the @rainbow-me/animated-charts
   const screenWidth = Dimensions.get("window").width;
 
+  //this updates the value at the top of the screen
+  //"value" is being passed in as an argument with nothing assigned
   const formatCurrency = (value) => {
+    //"worklet" only updates the UI thread instead of Javascript, "worklet" is part of the animated-charts library
+    //this means that you save a function because you dont need to update constantly (also its quicker)
+    //it will also snapback to the original value
     "worklet";
     if (value === "") {
-      return `$${current_price.usd.toFixed(2)}`;
+      return `$${current_price.usd.toFixed(2)}`; //returns this value as default (toFixed turns a int to string, the param is to make it more suitable for currency)
     }
-    return `$${parseFloat(value).toFixed(2)}`;
+    return `$${parseFloat(value).toFixed(2)}`; //(parsefloat changes number to string) the float is coming from the pointer on the chart, which is being assigned to value then fixed to two decimal
   };
 
+  //you change the coin value (aka 2BTC) then change the USD value
   const changeCoinValue = (value) => {
-    setCoinValue(value);
-    const floatValue = parseFloat(value.replace(",", ".")) || 0;
-    setUsdValue((floatValue * current_price.usd).toString());
+    setCoinValue(value); //this needs to be a string for input so you can use decimals
+    const floatValue = parseFloat(value.replace(",", ".")) || 0; //change the value to a float so we can multiply
+    setUsdValue((floatValue * current_price.usd).toString()); // multiply then convert back to string for the usd result
   };
 
   const changeUsdValue = (value) => {
@@ -102,7 +110,7 @@ const CoinDetailedScreen = () => {
         </View>
         <View>
           <ChartPath
-            strokeWidth={2}
+            strokeWidth={2} //make the line thicker
             height={screenWidth / 2}
             stroke={chartColor}
             width={screenWidth}
@@ -114,11 +122,11 @@ const CoinDetailedScreen = () => {
             <Text style={{ color: "white", alignSelf: "center" }}>
               {symbol.toUpperCase()}
             </Text>
-            <TextInput
+            <TextInput //text input always returns string even though numeric is set
               style={styles.input}
-              value={coinValue}
+              value={coinValue} //comes from the useState
               keyboardType="numeric"
-              onChangeText={changeCoinValue}
+              onChangeText={changeCoinValue} //comes from the function
             />
           </View>
 
@@ -126,9 +134,9 @@ const CoinDetailedScreen = () => {
             <Text style={{ color: "white", alignSelf: "center" }}>USD</Text>
             <TextInput
               style={styles.input}
-              value={usdValue}
+              value={usdValue} //comes from the useState
               keyboardType="numeric"
-              onChangeText={changeUsdValue}
+              onChangeText={changeUsdValue} //comes from the function
             />
           </View>
         </View>
