@@ -13,6 +13,8 @@ A considerable amount of "documentation" in the form of comments before, after a
 - [React Native](https://reactnative.dev/)
 - [Expo Go](https://expo.dev/client)
 
+-[Animated Charts by Rainbow.me](https://github.com/rainbow-me/react-native-animated-charts)
+
 ## Getting Started
 
 Simply fork or clone the repo.
