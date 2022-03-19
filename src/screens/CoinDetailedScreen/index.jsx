@@ -64,6 +64,7 @@ const CoinDetailedScreen = () => {
     setUsdValue((floatValue * current_price.usd).toString()); // multiply then convert back to string for the usd result
   };
 
+  //same as above but changing the USD value as opposed to the crypto
   const changeUsdValue = (value) => {
     setUsdValue(value);
     const floatValue = parseFloat(value.replace(",", ".")) || 0;
