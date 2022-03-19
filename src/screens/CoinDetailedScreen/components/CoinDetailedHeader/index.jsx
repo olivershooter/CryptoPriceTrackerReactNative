@@ -6,6 +6,7 @@ import styles from "./styles";
 //image, symbol, and marketCapRank coming from CoinDetailedScreen
 //this is just for the header of the screen
 const CoinDetailedHeader = (props) => {
+  //passing in props, doing it this way is cleaner than having props.marketCapRank
   const { image, symbol, marketCapRank } = props;
   return (
     <View style={styles.headerContainer}>
