@@ -3,6 +3,7 @@ import { Text, View, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
 
+//the list from the JSON we will use in the app
 const CoinItem = ({ marketCoin }) => {
   const {
     name,
@@ -14,9 +15,12 @@ const CoinItem = ({ marketCoin }) => {
     image,
   } = marketCoin;
 
+  //change the percentage colour depending on a - or + change
   const percentageColor =
     price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
 
+  //this is just to normalize the numbers so there isn't so many if the marketcap is high
+  //ie no 100000000000 and just 1T
   const normalizeMarketCap = (marketCap) => {
     if (marketCap > 1000000000000) {
       return `${Math.floor(marketCap / 1000000000000)} T`;
