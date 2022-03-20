@@ -1,11 +1,13 @@
 import React from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 //the list from the JSON we will use in the app
 const CoinItem = ({ marketCoin }) => {
   const {
+    id,
     name,
     current_price,
     market_cap_rank,
@@ -14,6 +16,8 @@ const CoinItem = ({ marketCoin }) => {
     market_cap,
     image,
   } = marketCoin;
+
+  const navigation = useNavigation();
 
   //change the percentage colour depending on a - or + change
   const percentageColor =
@@ -38,7 +42,10 @@ const CoinItem = ({ marketCoin }) => {
   };
 
   return (
-    <View style={styles.coinContainer}>
+    <Pressable
+      style={styles.coinContainer}
+      onPress={() => navigation.navigate("CoinDetailedScreen", { coinId: id })}
+    >
       <Image
         source={{ uri: image }}
         style={{
@@ -72,7 +79,7 @@ const CoinItem = ({ marketCoin }) => {
           MCap {normalizeMarketCap(market_cap)}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
