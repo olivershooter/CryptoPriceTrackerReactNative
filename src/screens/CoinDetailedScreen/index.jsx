@@ -10,6 +10,7 @@ import {
   ChartPathProvider,
   ChartYLabel,
 } from "@rainbow-me/animated-charts";
+import { useRoute } from "@react-navigation/native";
 
 //values coming from the crypto json
 //can parse data further with the {}
@@ -30,6 +31,13 @@ const CoinDetailedScreen = () => {
   //for the price converter function
   const [coinValue, setCoinValue] = useState("1");
   const [usdValue, setUsdValue] = useState(current_price.usd.toString());
+
+  //for the navigation, receive the object through the parameter
+  const route = useRoute();
+
+  const {
+    params: { coinId },
+  } = route;
 
   //the colour of the percentage changes based on if it's below 0 or above 0
   //read like: if the price_change_percentage_24h is less than 0, then make the colour ea3943
