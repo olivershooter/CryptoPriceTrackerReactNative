@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Dimensions, TextInput } from "react-native";
-import Coin from "../../../assets/data/crypto.json";
+import {
+  View,
+  Text,
+  Dimensions,
+  TextInput,
+  ActivityIndicator,
+} from "react-native";
 import CoinDetailedHeader from "./components/CoinDetailedHeader";
 import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
@@ -11,26 +16,14 @@ import {
   ChartYLabel,
 } from "@rainbow-me/animated-charts";
 import { useRoute } from "@react-navigation/native";
+import {
+  getDetailedCoinData,
+  getCoinMarketChart,
+} from "../../services/requests";
 
-//values coming from the crypto json
-//can parse data further with the {}
 const CoinDetailedScreen = () => {
-  const {
-    image: { small },
-    name,
-    symbol,
-    prices,
-    market_data: {
-      market_cap_rank,
-      current_price,
-      price_change_percentage_24h,
-    },
-  } = Coin;
-
-  //props is the data coming from outside, state is the data the components is responsible for
-  //for the price converter function
-  const [coinValue, setCoinValue] = useState("1");
-  const [usdValue, setUsdValue] = useState(current_price.usd.toString());
+  const [coin, setCoin] = useState(null);
+  const [coinMarketData, setCoinMarketData] = useState(null);
 
   //for the navigation, receive the object through the parameter
   const route = useRoute();
@@ -38,6 +31,50 @@ const CoinDetailedScreen = () => {
   const {
     params: { coinId },
   } = route;
+
+  //this state lets us know if its loading or not
+  const [loading, setLoading] = useState(false);
+
+  //props is the data coming from outside, state is the data the components is responsible for
+  //for the price converter function
+  const [coinValue, setCoinValue] = useState("1");
+  const [usdValue, setUsdValue] = useState("");
+
+  //method to fetchCoinData
+  //set loading so user knows the json is being fetched
+  //make fetchedCoinData as await getDetailedCoinData with the params of the coinId
+  //after getting said information set the coin to fetchedCoinData
+  const fetchCoinData = async () => {
+    setLoading(true);
+    const fetchedCoinData = await getDetailedCoinData(coinId);
+    const fetchedCoinMarketData = await getCoinMarketChart(coinId);
+    setCoin(fetchedCoinData);
+    setCoinMarketData(fetchedCoinMarketData);
+    setUsdValue(fetchedCoinData.market_data.current_price.usd.toString());
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchCoinData();
+  }, []);
+
+  //little method to display a loading icon
+  if (loading || !coin || !coinMarketData) {
+    return <ActivityIndicator size="large" />;
+  }
+
+  const {
+    image: { small },
+    name,
+    symbol,
+    market_data: {
+      market_cap_rank,
+      current_price,
+      price_change_percentage_24h,
+    },
+  } = coin;
+
+  const { prices } = coinMarketData;
 
   //the colour of the percentage changes based on if it's below 0 or above 0
   //read like: if the price_change_percentage_24h is less than 0, then make the colour ea3943
