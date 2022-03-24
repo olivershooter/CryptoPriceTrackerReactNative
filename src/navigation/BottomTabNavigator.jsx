@@ -1,8 +1,8 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen/index";
-
-import { Entypo } from "@expo/vector-icons";
+import WatchListScreen from "../screens/WatchListScreen";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +25,18 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Entypo name="home" size={focused ? 30 : 25} color={color} />
+            //lots of options but fairly straight forward in explanation
+            //main thing is focused = if the screen is open
+            //color is a param from BottomTabNavigator and knows if its active or inactive automatically
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Watchlist"
+        component={WatchListScreen}
+        options={{
+          tabBarIcon: ({ focused, color }) => (
+            <FontAwesome name="star" size={focused ? 30 : 25} color={color} />
             //lots of options but fairly straight forward in explanation
             //main thing is focused = if the screen is open
             //color is a param from BottomTabNavigator and knows if its active or inactive automatically

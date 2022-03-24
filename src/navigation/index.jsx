@@ -16,11 +16,8 @@ const Navigation = () => {
       initialRouteName="Root"
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name={"Root"} component={BottomTabNavigator} />
-      <Stack.Screen
-        name={"CoinDetailedScreen"}
-        component={CoinDetailedScreen}
-      />
+      <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="CoinDetailedScreen" component={CoinDetailedScreen} />
     </Stack.Navigator>
   );
 };
