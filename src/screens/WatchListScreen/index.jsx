@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text } from "react-native";
+import { useWatchList } from "../../Contexts/WatchlistContext";
 
 const WatchListScreen = () => {
+  const { value } = useWatchList();
   return (
     <View>
       <Text style={{ color: "white" }}>Hello</Text>
