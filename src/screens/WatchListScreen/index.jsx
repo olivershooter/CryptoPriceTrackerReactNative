@@ -5,12 +5,8 @@ import CoinItem from "../../components/CoinItem";
 
 const WatchListScreen = () => {
   const { watchlistCoinIds } = useWatchList();
-  return (
-    <FlatList
-      data={watchlistCoinIds}
-      renderItem={({ item }) => <CoinItem marketCoin={item} />}
-    />
-  );
+  console.log(watchlistCoinIds);
+  return <FlatList data={watchlistCoinIds} />;
 };
 
 export default WatchListScreen;

@@ -11,10 +11,18 @@ const CoinDetailedHeader = (props) => {
   //passing in props, doing it this way is cleaner than having props.marketCapRank
   const { coinId, image, symbol, marketCapRank } = props;
   const navigation = useNavigation(); //using the navigation hook
-  const { watchlistCoinIds } = useWatchList(); //using the watchlist hook we created
+  const { watchlistCoinIds, storeWatchlistCoinId, removeWatchlistCoinId } =
+    useWatchList(); //using the watchlist hook we created
 
   const checkIfCoinIsWatchlisted = () =>
     watchlistCoinIds.some((coinIdValue) => coinIdValue === coinId); //check if the coin is in the watchlist
+
+  const handleWatchlistCoin = () => {
+    if (checkIfCoinIsWatchlisted()) {
+      return removeWatchlistCoinId(coinId); //remove the coin from the watchlist
+    }
+    return storeWatchlistCoinId(coinId); //add the coin to the watchlist
+  };
 
   return (
     <View style={styles.headerContainer}>
@@ -34,9 +42,10 @@ const CoinDetailedHeader = (props) => {
         </View>
       </View>
       <FontAwesome
-        name={checkIfCoinIsWatchlisted ? "star" : "star-o"}
+        name={checkIfCoinIsWatchlisted() ? "star" : "star-o"} //if the coin is in the watchlist, show the star icon
         size={25}
-        color={checkIfCoinIsWatchlisted ? "#FFBF00" : "white"} //if the coin is in the watchlist, change the color
+        color={checkIfCoinIsWatchlisted() ? "#FFBF00" : "white"} //if the coin is in the watchlist, change the color
+        onPress={() => handleWatchlistCoin}
       />
     </View>
   );

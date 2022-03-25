@@ -16,7 +16,7 @@ const WatchlistProvider = ({ children }) => {
       const jsonValue = await AsyncStorage.getItem("@watchlist_coins");
       setWatchlistCoinIds(jsonValue != null ? JSON.parse(jsonValue) : []); //need to make sure its not empty
     } catch (e) {
-      // saving error
+      console.log(e);
     }
   };
 
