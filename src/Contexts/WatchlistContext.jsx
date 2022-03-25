@@ -1,6 +1,6 @@
 //Context API for research
 import React, { useContext, createContext, useState, useEffect } from "react";
-import AsyncStorage from "react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const WatchlistContext = createContext();
 
@@ -25,18 +25,31 @@ const WatchlistProvider = ({ children }) => {
   }, []);
 
   //storing the watchlist data in Async storage
-  const storeWatchlistData = async (coinId) => {
+  const storeWatchlistCoinId = async (coinId) => {
     try {
       const newWatchlist = [...watchlistCoinIds, coinId]; //adding the coinId to the watchlist
       const jsonValue = JSON.stringify(newWatchlist); //converting the array to a string
       await AsyncStorage.setItem("@watchlist_coins", jsonValue); //saving the string to Async storage
+      setWatchlistCoinIds(newWatchlist); //setting the state to the new watchlist
     } catch (e) {
       console.log(e);
     }
   };
 
+  const removeWatchlistCoinId = async (coinId) => {
+    const newWatchlist = watchlistCoinIds.filter(
+      (coinIdValue) => coinIdValue !== coinId
+    ); //removing the coinId from the watchlist
+    const jsonValue = JSON.stringify(newWatchlist); //converting the array to a string
+    await AsyncStorage.setItem("@watchlist_coins", jsonValue);
+    //saving the string to Async storage, just update here rather than deleting the entire "@watchlist_coins"
+    setWatchlistCoinIds(newWatchlist); //setting the state to the new watchlist
+  };
+
   return (
-    <WatchlistContext.Provider value={{ watchlistCoinIds }}>
+    <WatchlistContext.Provider
+      value={{ watchlistCoinIds, storeWatchlistCoinId, removeWatchlistCoinId }}
+    >
       {children}
     </WatchlistContext.Provider>
   );

@@ -1,16 +1,20 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import { Ionicons, EvilIcons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { useWatchList } from "../../../../Contexts/WatchlistContext";
 
 //image, symbol, and marketCapRank coming from CoinDetailedScreen
 //this is just for the header of the screen
 const CoinDetailedHeader = (props) => {
   //passing in props, doing it this way is cleaner than having props.marketCapRank
-  const { image, symbol, marketCapRank } = props;
+  const { coinId, image, symbol, marketCapRank } = props;
+  const navigation = useNavigation(); //using the navigation hook
+  const { watchlistCoinIds } = useWatchList(); //using the watchlist hook we created
 
-  const navigation = useNavigation();
+  const checkIfCoinIsWatchlisted = () =>
+    watchlistCoinIds.some((coinIdValue) => coinIdValue === coinId); //check if the coin is in the watchlist
 
   return (
     <View style={styles.headerContainer}>
@@ -29,7 +33,11 @@ const CoinDetailedHeader = (props) => {
           </Text>
         </View>
       </View>
-      <EvilIcons name="user" size={30} color="white" />
+      <FontAwesome
+        name={checkIfCoinIsWatchlisted ? "star" : "star-o"}
+        size={25}
+        color={checkIfCoinIsWatchlisted ? "#FFBF00" : "white"} //if the coin is in the watchlist, change the color
+      />
     </View>
   );
 };

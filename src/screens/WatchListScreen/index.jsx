@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
-import { View, Text } from "react-native";
+import React from "react";
+import { View, Text, FlatList } from "react-native";
 import { useWatchList } from "../../Contexts/WatchlistContext";
+import CoinItem from "../../components/CoinItem";
 
 const WatchListScreen = () => {
   const { watchlistCoinIds } = useWatchList();
   return (
-    <View>
-      <Text style={{ color: "white" }}>Hello</Text>
-    </View>
+    <FlatList
+      data={watchlistCoinIds}
+      renderItem={({ item }) => <CoinItem marketCoin={item} />}
+    />
   );
 };
 
