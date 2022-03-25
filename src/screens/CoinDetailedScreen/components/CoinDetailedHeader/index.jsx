@@ -3,7 +3,7 @@ import { View, Text, Image } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { useWatchList } from "../../../../Contexts/WatchlistContext";
+import { useWatchlist } from "../../../../Contexts/WatchlistContext";
 
 //image, symbol, and marketCapRank coming from CoinDetailedScreen
 //this is just for the header of the screen
@@ -12,7 +12,7 @@ const CoinDetailedHeader = (props) => {
   const { coinId, image, symbol, marketCapRank } = props;
   const navigation = useNavigation(); //using the navigation hook
   const { watchlistCoinIds, storeWatchlistCoinId, removeWatchlistCoinId } =
-    useWatchList(); //using the watchlist hook we created
+    useWatchlist(); //using the watchlist hook we created
 
   const checkIfCoinIsWatchlisted = () =>
     watchlistCoinIds.some((coinIdValue) => coinIdValue === coinId); //check if the coin is in the watchlist
@@ -45,7 +45,7 @@ const CoinDetailedHeader = (props) => {
         name={checkIfCoinIsWatchlisted() ? "star" : "star-o"} //if the coin is in the watchlist, show the star icon
         size={25}
         color={checkIfCoinIsWatchlisted() ? "#FFBF00" : "white"} //if the coin is in the watchlist, change the color
-        onPress={() => handleWatchlistCoin}
+        onPress={handleWatchlistCoin}
       />
     </View>
   );

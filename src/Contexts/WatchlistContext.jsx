@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const WatchlistContext = createContext();
 
-export const useWatchList = () => useContext(WatchlistContext);
+export const useWatchlist = () => useContext(WatchlistContext);
 
 const WatchlistProvider = ({ children }) => {
   const [watchlistCoinIds, setWatchlistCoinIds] = useState([]);
