@@ -24,6 +24,17 @@ const WatchlistProvider = ({ children }) => {
     getWatchlistData();
   }, []);
 
+  //storing the watchlist data in Async storage
+  const storeWatchlistData = async (coinId) => {
+    try {
+      const newWatchlist = [...watchlistCoinIds, coinId]; //adding the coinId to the watchlist
+      const jsonValue = JSON.stringify(newWatchlist); //converting the array to a string
+      await AsyncStorage.setItem("@watchlist_coins", jsonValue); //saving the string to Async storage
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <WatchlistContext.Provider value={{ watchlistCoinIds }}>
       {children}

@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { useWatchList } from "../../Contexts/WatchlistContext";
 
 const WatchListScreen = () => {
-  const { value } = useWatchList();
+  const { watchlistCoinIds } = useWatchList();
   return (
     <View>
       <Text style={{ color: "white" }}>Hello</Text>
