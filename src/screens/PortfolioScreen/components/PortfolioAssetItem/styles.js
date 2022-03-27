@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
   },
   coinContainer: {
     flexDirection: "row",
+    padding: 15,
+  },
+  quantityContainer: {
+    marginLeft: "auto",
+    alignItems: "flex-end",
   },
 });
 
