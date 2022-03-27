@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 20,
   },
+
   item: {
     padding: 10,
     marginTop: 2,
@@ -13,6 +14,42 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#444444",
     borderRadius: 5,
+  },
+
+  ticker: {
+    color: "gray",
+    fontWeight: "700",
+    fontSize: 20,
+    marginTop: 25,
+    marginLeft: 5,
+  },
+
+  boughtQuantityContainer: {
+    alignItems: "center",
+    marginTop: 50,
+    flex: 1,
+  },
+
+  buttonContainer: {
+    backgroundColor: "#4169E1",
+    padding: 10,
+    alignItems: "center",
+    marginVertical: 30,
+    marginHorizontal: 20,
+    borderRadius: 5,
+  },
+
+  buttonText: {
+    color: "white",
+    fontSize: 17,
+    fontWeight: "600",
+  },
+
+  pricePerCoin: {
+    color: "gray",
+    fontWeight: "600",
+    fontSize: 17,
+    letterSpacing: 0.5,
   },
 });
 
