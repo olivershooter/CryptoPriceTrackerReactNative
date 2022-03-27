@@ -1,15 +1,16 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles.js";
+import PortfolioAssetItem from "../PortfolioAssetItem/index.jsx";
 
 //ea3943 || 16c784
 const PortfolioAssetsList = () => {
   return (
     <View>
       <FlatList
-        data={[]}
-        renderItem={() => <Text>item</Text>}
+        data={[{ id: "bitcoin" }]}
+        renderItem={({ item }) => <PortfolioAssetItem assetItem={item} />}
         ListHeaderComponent={
           <>
             <View style={styles.balanceContainer}>
@@ -28,7 +29,13 @@ const PortfolioAssetsList = () => {
                 <Text style={styles.percentageChange}>1.2%</Text>
               </View>
             </View>
+            <Text style={styles.assetsLabel}>Your Assets</Text>
           </>
+        }
+        ListFooterComponent={
+          <Pressable style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Add New Asset</Text>
+          </Pressable>
         }
       />
     </View>
