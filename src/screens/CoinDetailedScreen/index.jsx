@@ -81,7 +81,7 @@ const CoinDetailedScreen = () => {
   //read like: if the price_change_percentage_24h is less than 0, then make the colour ea3943
   //otherwise if price_change_percentage_24h is more than 0, then make the colour 16c784
   const percentageColor =
-    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
+    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784" || "white";
 
   //changing the colour of the chart with the same formula as above
   //the prices[0][1] is the plotting marks (X,Y)
@@ -152,7 +152,7 @@ const CoinDetailedScreen = () => {
               style={{ alignSelf: "center", marginRight: 5 }}
             />
             <Text style={styles.priceChange}>
-              {price_change_percentage_24h.toFixed(2)}%
+              {price_change_percentage_24h?.toFixed(2)}%
             </Text>
           </View>
         </View>

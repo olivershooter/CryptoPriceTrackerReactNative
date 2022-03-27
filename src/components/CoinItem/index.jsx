@@ -21,7 +21,7 @@ const CoinItem = ({ marketCoin }) => {
 
   //change the percentage colour depending on a - or + change
   const percentageColor =
-    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
+    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784" || "white"; //if the price change is negative, change the colour to red, else change it to green
 
   //this is just to normalize the numbers so there isn't so many if the marketcap is high
   //ie no 100000000000 and just 1T
@@ -69,7 +69,7 @@ const CoinItem = ({ marketCoin }) => {
             style={{ alignSelf: "center", marginRight: 5 }}
           />
           <Text style={{ color: percentageColor }}>
-            {price_change_percentage_24h.toFixed(2)}%
+            {price_change_percentage_24h?.toFixed(2)}%
           </Text>
         </View>
       </View>
