@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    backgroundColor: "#4169E1",
     padding: 10,
     alignItems: "center",
     marginVertical: 30,
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    color: "white",
     fontSize: 17,
     fontWeight: "600",
   },
