@@ -60,7 +60,7 @@ const AddNewAssetScreen = () => {
       image: selectedCoin.image.small,
       ticker: selectedCoin.symbol.toUpperCase(),
       quantityBought: parseFloat(boughtAssetQuantity),
-      priceBoughtL: selectedCoin.market_data.current_price.usd,
+      priceBought: selectedCoin.market_data.current_price.usd,
     };
 
     const newAssets = [...assetsInStorage, newAsset];
@@ -117,7 +117,7 @@ const AddNewAssetScreen = () => {
               ...styles.buttonContainer,
               backgroundColor: isQuantityEntered() ? "#303030" : "#4169E1",
             }}
-            onPress={() => onAddNewAsset()}
+            onPress={onAddNewAsset}
             disabled={isQuantityEntered()}
           >
             <Text

@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
+    alignSelf: "flex-end",
   },
   ticker: {
     color: "gray",
-    fontWeight: "600",
+    fontWeight: "700",
   },
   coinContainer: {
     flexDirection: "row",
@@ -17,6 +18,12 @@ const styles = StyleSheet.create({
   quantityContainer: {
     marginLeft: "auto",
     alignItems: "flex-end",
+  },
+  coinImage: {
+    height: 30,
+    width: 30,
+    marginRight: 10,
+    alignSelf: "center",
   },
 });
 
