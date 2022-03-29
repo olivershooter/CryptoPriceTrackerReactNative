@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, RefreshControl } from "react-native";
+import { View, Text, FlatList, RefreshControl } from "react-native";
 import CoinItem from "../../components/CoinItem";
 import { getMarketData } from "../../services/requests.js";
 
@@ -38,20 +38,32 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    //Flatlist with the data for the home screen
-    //the params are the data from the json, parsed via the named function
-    <FlatList
-      data={coins}
-      renderItem={({ item }) => <CoinItem marketCoin={item} />}
-      onEndReached={() => fetchCoins(coins.length / 50 + 1)} //do it this way because the list is 50 items long, divide by it and add one = new page number
-      refreshControl={
-        <RefreshControl
-          refreshing={loading}
-          tintColor="white"
-          onRefresh={refetchCoins}
-        /> //cool thing refresh control
-      }
-    />
+    <View>
+      <Text
+        style={{
+          fontFamily: "DroidSans",
+          color: "white",
+          fontSize: 25,
+          letterSpacing: 1,
+          paddingHorizontal: 20,
+          paddingBottom: 5,
+        }}
+      >
+        Crypto Assets
+      </Text>
+      <FlatList
+        data={coins}
+        renderItem={({ item }) => <CoinItem marketCoin={item} />}
+        onEndReached={() => fetchCoins(coins.length / 50 + 1)} //do it this way because the list is 50 items long, divide by it and add one = new page number
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            tintColor="white"
+            onRefresh={refetchCoins}
+          /> //cool thing refresh control
+        }
+      />
+    </View>
   );
 };
 
