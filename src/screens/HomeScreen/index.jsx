@@ -41,7 +41,7 @@ const HomeScreen = () => {
     <View>
       <Text
         style={{
-          fontFamily: "DroidSans",
+          fontFamily: "Poppins_600SemiBold",
           color: "white",
           fontSize: 25,
           letterSpacing: 1,

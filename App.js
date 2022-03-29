@@ -7,10 +7,12 @@ import WatchlistProvider from "./src/Contexts/WatchlistContext";
 import { RecoilRoot } from "recoil";
 import { useFonts } from "expo-font";
 import { Inter_900Black } from "@expo-google-fonts/inter";
+import { Poppins_600SemiBold } from "@expo-google-fonts/poppins";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
     Inter_900Black,
+    Poppins_600SemiBold,
     DroidSans: require("./assets/fonts/DroidSans.ttf"),
   });
 
