@@ -98,7 +98,13 @@ const CoinDetailedScreen = () => {
     //it will also snapback to the original value
     "worklet";
     if (value === "") {
-      return `$${current_price.usd.toFixed(2)}`; //returns this value as default (toFixed turns a int to string, the param is to make it more suitable for currency)
+      if (current_price.usd < 1) {
+        return `$${current_price.usd}`; //returns this value as default (toFixed turns a int to string, the param is to make it more suitable for currency)
+      }
+      return `$${current_price.usd.toFixed(2)}`;
+    }
+    if (current_price.usd < 1) {
+      return `$${parseFloat(value)}`; //returns this value as default (toFixed turns a int to string, the param is to make it more suitable for currency)
     }
     return `$${parseFloat(value).toFixed(2)}`; //(parsefloat changes number to string) the float is coming from the pointer on the chart, which is being assigned to value then fixed to two decimal
   };

@@ -26,17 +26,17 @@ const CoinItem = ({ marketCoin }) => {
   //this is just to normalize the numbers so there isn't so many if the marketcap is high
   //ie no 100000000000 and just 1T
   const normalizeMarketCap = (marketCap) => {
-    if (marketCap > 1000000000000) {
-      return `${Math.floor(marketCap / 1000000000000)} T`;
+    if (marketCap > 1e12) {
+      return `${(marketCap / 1e12).toFixed(3)} T`;
     }
-    if (marketCap > 1000000000) {
-      return `${Math.floor(marketCap / 1000000000)} B`;
+    if (marketCap > 1e9) {
+      return `${(marketCap / 1e9).toFixed(3)} B`;
     }
-    if (marketCap > 1000000) {
-      return `${Math.floor(marketCap / 1000000)} M`;
+    if (marketCap > 1e6) {
+      return `${(marketCap / 1e6).toFixed(3)} M`;
     }
-    if (marketCap > 1000) {
-      return `${Math.floor(marketCap / 1000)} K`;
+    if (marketCap > 1e3) {
+      return `${(marketCap / 1e3).toFixed(3)} K`;
     }
     return marketCap;
   };
