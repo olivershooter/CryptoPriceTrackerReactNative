@@ -16,10 +16,10 @@ export const getDetailedCoinData = async (coinId) => {
 };
 
 //same as above with the API but this time its for the chart
-export const getCoinMarketChart = async (coinId) => {
+export const getCoinMarketChart = async (coinId, selectedRange) => {
   try {
     const response = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=1&interval=hourly`
+      `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${selectedRange}&interval=hourly`
     );
     return response.data;
   } catch (e) {

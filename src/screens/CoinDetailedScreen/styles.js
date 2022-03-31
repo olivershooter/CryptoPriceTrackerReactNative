@@ -28,11 +28,19 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'white',
+    borderBottomColor: "white",
     padding: 10,
     fontSize: 16,
-    color: 'white'
-  }
+    color: "white",
+  },
+  filtersContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "#2b2b2b",
+    paddingVertical: 5,
+    borderRadius: 5,
+    marginVertical: 10,
+  },
 });
 
 export default styles;
