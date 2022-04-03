@@ -1,4 +1,4 @@
-  <h3 align="center" font-size="large">Crypto Tracker - React Native</h3>
+  <h6 align="center" >Crypto Tracker - React Native</h3>
 
 <!-- ABOUT THE PROJECT -->
 
@@ -28,9 +28,10 @@ Simply fork or clone the repo.
 
 ## Future improvements
 
--
+- Edit currently owned coins (maybe you bought some more and want to change them).
+- Styles.js everywhere, just much cleaner than inline.
 
-<!-- CONTACT -->
+---
 
 ## Contact
 
