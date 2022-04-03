@@ -2,30 +2,24 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   title: {
-    color: "white",
-    fontWeight: "bold",
+    color: 'white',
     fontSize: 16,
-    alignSelf: "flex-end",
+    fontWeight: 'bold',
+    alignSelf: 'flex-end'
   },
   ticker: {
-    color: "gray",
-    fontWeight: "700",
+    color: 'grey',
+    fontWeight: '700' 
   },
   coinContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 15,
-    backgroundColor: "#121212",
+    backgroundColor: "#121212"
   },
   quantityContainer: {
-    marginLeft: "auto",
-    alignItems: "flex-end",
-  },
-  coinImage: {
-    height: 30,
-    width: 30,
-    marginRight: 10,
-    alignSelf: "center",
-  },
+    marginLeft: 'auto',
+    alignItems: 'flex-end'
+  }
 });
 
 export default styles;

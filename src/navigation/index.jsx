@@ -1,21 +1,16 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import CoinDetailedScreen from "../screens/CoinDetailedScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
 import AddNewAssetScreen from "../screens/AddNewAssetScreen";
 
+//the following are not used in the bottom tab navigator
+//createNativeStackNavigator is a hook that allows us to use the native stack navigation
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  //Stack.Navigator holds the screens in the app
-  //obviously "Stack" comes from the const above
-  //name can be anything, component is how we tell it where to look
   return (
-    <Stack.Navigator
-      initialRouteName="Root"
-      // screenOptions={{ headerShown: false }}
-    >
+    <Stack.Navigator initialRouteName="Root">
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
@@ -31,9 +26,13 @@ const Navigation = () => {
         component={AddNewAssetScreen}
         options={{
           title: "Add New Asset",
-          headerStyle: { backgroundColor: "#121212" },
+          headerStyle: {
+            backgroundColor: "#121212",
+          },
           headerTintColor: "white",
-          headerTitleStyle: { fontWeight: "bold" },
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
         }}
       />
     </Stack.Navigator>

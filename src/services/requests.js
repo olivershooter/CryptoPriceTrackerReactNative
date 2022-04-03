@@ -1,10 +1,10 @@
 import axios from "axios";
 
-//axios allows us to handle the json data from CoinGecko
-//pass in coinId as a param because this is then inserted into the API call
-//so if a user clicks on one of the coins in the list, the id will be replaced in the string calling the right coin
+//using Axios to make requests
+//further reading for Axios: https://www.npmjs.com/package/axios
+
+//getDetailedCoinData function which requires a coin's symbol as an argument and returns a promise from the CoinGecko API
 export const getDetailedCoinData = async (coinId) => {
-  //put everything in a try/catch to wait for the try
   try {
     const response = await axios.get(
       `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`
@@ -15,7 +15,6 @@ export const getDetailedCoinData = async (coinId) => {
   }
 };
 
-//same as above with the API but this time its for the chart
 export const getCoinMarketChart = async (coinId, selectedRange) => {
   try {
     const response = await axios.get(
@@ -27,7 +26,6 @@ export const getCoinMarketChart = async (coinId, selectedRange) => {
   }
 };
 
-//market data for the home screen to display, passing in pageNumber as a param for the flastlist load
 export const getMarketData = async (pageNumber = 1) => {
   try {
     const response = await axios.get(
@@ -39,10 +37,10 @@ export const getMarketData = async (pageNumber = 1) => {
   }
 };
 
-export const getWatchlistedCoins = async (pageNumber = 1, coinId) => {
+export const getWatchlistedCoins = async (pageNumber = 1, coinIds) => {
   try {
     const response = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinId}&order=market_cap_desc&per_page=50&page=${pageNumber}&sparkline=false&price_change_percentage=24h`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds}&order=market_cap_desc&per_page=50&page=${pageNumber}&sparkline=false&price_change_percentage=24h`
     );
     return response.data;
   } catch (e) {
@@ -54,6 +52,17 @@ export const getAllCoins = async () => {
   try {
     const response = await axios.get(
       `https://api.coingecko.com/api/v3/coins/list?include_platform=false`
+    );
+    return response.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getCandleChartData = async (coinId, days = 1) => {
+  try {
+    const response = await axios.get(
+      `https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=${days}`
     );
     return response.data;
   } catch (e) {

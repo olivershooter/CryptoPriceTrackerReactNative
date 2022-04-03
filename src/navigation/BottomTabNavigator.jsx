@@ -1,10 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/HomeScreen/index";
-import WatchListScreen from "../screens/WatchListScreen";
+import HomeScreen from "../screens/HomeScreen";
+import WatchlistScreen from "../screens/WatchlistScreen";
 import PortfolioScreen from "../screens/PortfolioScreen";
 import { Entypo, FontAwesome, Foundation } from "@expo/vector-icons";
 
+//this is for the bottom tab navigator to navigate between Home, Portfolio, and Watchlist
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
@@ -26,9 +27,6 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Entypo name="home" size={focused ? 30 : 25} color={color} />
-            //lots of options but fairly straight forward in explanation
-            //main thing is focused = if the screen is open
-            //color is a param from BottomTabNavigator and knows if its active or inactive automatically
           ),
         }}
       />
@@ -47,7 +45,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Watchlist"
-        component={WatchListScreen}
+        component={WatchlistScreen}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <FontAwesome name="star" size={focused ? 30 : 25} color={color} />

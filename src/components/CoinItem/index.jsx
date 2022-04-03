@@ -4,7 +4,6 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
-//the list from the JSON we will use in the app
 const CoinItem = ({ marketCoin }) => {
   const {
     id,
@@ -16,15 +15,17 @@ const CoinItem = ({ marketCoin }) => {
     market_cap,
     image,
   } = marketCoin;
+  //this is the data from the API saved as a variable making sure to destructure it
 
+  //this is for the navigation hook
   const navigation = useNavigation();
 
-  //change the percentage colour depending on a - or + change
+  //to change the percentage colour
+  //if the percentage is less than 0, then it is red, else green, or if neither then white
   const percentageColor =
-    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784" || "white"; //if the price change is negative, change the colour to red, else change it to green
+    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784" || "white";
 
-  //this is just to normalize the numbers so there isn't so many if the marketcap is high
-  //ie no 100000000000 and just 1T
+  //the market cap could be too big, so we need to format it
   const normalizeMarketCap = (marketCap) => {
     if (marketCap > 1e12) {
       return `${(marketCap / 1e12).toFixed(3)} T`;
@@ -41,10 +42,11 @@ const CoinItem = ({ marketCoin }) => {
     return marketCap;
   };
 
+  //returning everything to the screen
   return (
     <Pressable
       style={styles.coinContainer}
-      onPress={() => navigation.navigate("CoinDetailedScreen", { coinId: id })}
+      onPress={() => navigation.navigate("CoinDetailedScreen", { coinId: id })} //this is the navigation hook
     >
       <Image
         source={{ uri: image }}
@@ -74,7 +76,7 @@ const CoinItem = ({ marketCoin }) => {
         </View>
       </View>
       <View style={{ marginLeft: "auto", alignItems: "flex-end" }}>
-        <Text style={styles.title}>${current_price}</Text>
+        <Text style={styles.title}>{current_price}</Text>
         <Text style={{ color: "white" }}>
           MCap {normalizeMarketCap(market_cap)}
         </Text>

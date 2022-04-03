@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, Pressable } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import SearchableDropDown from "react-native-searchable-dropdown";
-//using SearchableDropDown for ease rather than creating my own
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import SearchableDropdown from "react-native-searchable-dropdown";
 import styles from "./styles";
 import { useRecoilState } from "recoil";
 import { allPortfolioBoughtAssetsInStorage } from "../../atoms/PortfolioAssets";
 import { getAllCoins, getDetailedCoinData } from "../../services/requests";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import uuid from "react-native-uuid";
 
 const AddNewAssetScreen = () => {
-  const [allCoins, setAllCoins] = useState([]);
-  const [boughtAssetQuantity, setBoughtAssetQuantity] = useState("");
+  const [allCoins, setAllCoins] = useState([]); //allCoins is the array of all the coins
+  const [boughtAssetQuantity, setBoughtAssetQuantity] = useState(""); //boughtAssetQuantity is the quantity of the coin that is being bought
+  const [loading, setLoading] = useState(false); //loading is the boolean that is used to show the loading screen
+  const [selectedCoinId, setSelectedCoinId] = useState(null); //selectedCoinId is the id of the coin that is being bought
+  const [selectedCoin, setSelectedCoin] = useState(null); //selectedCoin is the coin that is being bought
+
   const [assetsInStorage, setAssetsInStorage] = useRecoilState(
     allPortfolioBoughtAssetsInStorage
-  );
-  const [loading, setLoading] = useState(false);
-  const [selectedCoinId, setSelectedCoinId] = useState(null);
-  const [selectedCoin, setSelectedCoin] = useState(null);
+  ); //useRecoilState is used to get the data from the atom
 
+  //this is the navigation hook
   const navigation = useNavigation();
 
+  //this is the function that is called when the user presses the add button
   const isQuantityEntered = () => boughtAssetQuantity === "";
 
+  //fetches all the coins from the API
   const fetchAllCoins = async () => {
     if (loading) {
       return;
@@ -34,6 +44,7 @@ const AddNewAssetScreen = () => {
     setLoading(false);
   };
 
+  //fetches the detailed coin data from the API
   const fetchCoinInfo = async () => {
     if (loading) {
       return;
@@ -44,16 +55,20 @@ const AddNewAssetScreen = () => {
     setLoading(false);
   };
 
+  //use effect at start runs once when the component is loaded
   useEffect(() => {
     fetchAllCoins();
   }, []);
 
+  //use effect runs every time the selectedCoinId changes
   useEffect(() => {
     if (selectedCoinId) {
       fetchCoinInfo();
     }
   }, [selectedCoinId]);
 
+  //this function is called when the user presses the add button
+  //it adds the coin to the assetsInStorage array
   const onAddNewAsset = async () => {
     const newAsset = {
       id: selectedCoin.id,
@@ -64,7 +79,6 @@ const AddNewAssetScreen = () => {
       quantityBought: parseFloat(boughtAssetQuantity),
       priceBought: selectedCoin.market_data.current_price.usd,
     };
-
     const newAssets = [...assetsInStorage, newAsset];
     const jsonValue = JSON.stringify(newAssets);
     await AsyncStorage.setItem("@portfolio_coins", jsonValue);
@@ -73,15 +87,19 @@ const AddNewAssetScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <SearchableDropDown
-        items={allCoins}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={80}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <SearchableDropdown
+        items={allCoins} //items is the array of all the coins
         onItemSelect={(item) => setSelectedCoinId(item.id)}
         containerStyle={styles.dropdownContainer}
         itemStyle={styles.item}
         itemTextStyle={{ color: "white" }}
         resetValue={false}
-        placeholder={selectedCoinId || "Search for a coin..."}
+        placeholder={selectedCoinId || "Select a coin..."}
         placeholderTextColor="white"
         textInputProps={{
           underlineColorAndroid: "transparent",
@@ -100,7 +118,7 @@ const AddNewAssetScreen = () => {
           <View style={styles.boughtQuantityContainer}>
             <View style={{ flexDirection: "row" }}>
               <TextInput
-                style={{ fontSize: 90, color: "white" }}
+                style={{ color: "white", fontSize: 90 }}
                 value={boughtAssetQuantity}
                 placeholder="0"
                 keyboardType="numeric"
@@ -133,7 +151,7 @@ const AddNewAssetScreen = () => {
           </Pressable>
         </>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

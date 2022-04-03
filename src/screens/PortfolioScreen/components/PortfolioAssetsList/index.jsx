@@ -1,9 +1,8 @@
 import React from "react";
-import { View, Text, FlatList, Pressable } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import styles from "./styles.js";
-import PortfolioAssetItem from "../PortfolioAssetItem";
+import styles from "./styles";
+import PortfolioAssetsItem from "../PortfolioAssetItem";
 import { useNavigation } from "@react-navigation/native";
 import { useRecoilValue, useRecoilState } from "recoil";
 import {
@@ -12,6 +11,7 @@ import {
 } from "../../../../atoms/PortfolioAssets";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PortfolioAssetsList = () => {
   const navigation = useNavigation();
@@ -20,6 +20,9 @@ const PortfolioAssetsList = () => {
     allPortfolioBoughtAssetsInStorage
   );
 
+  //gets the current balance of the user which is amount of coins they have + current price * quantity bought
+  //some reading on reduce: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+  //defaulting to 0 if the user has no coins, stops bugs etc.
   const getCurrentBalance = () =>
     assets.reduce(
       (total, currentAsset) =>
@@ -27,6 +30,7 @@ const PortfolioAssetsList = () => {
       0
     );
 
+  //getting the total value of all the coins the user has and calculating the total change
   const getCurrentValueChange = () => {
     const currentBalance = getCurrentBalance();
     const boughtBalance = assets.reduce(
@@ -38,6 +42,7 @@ const PortfolioAssetsList = () => {
     return (currentBalance - boughtBalance).toFixed(2);
   };
 
+  //percentage change is the same as above but with a percentage sign
   const getCurrentPercentageChange = () => {
     const currentBalance = getCurrentBalance();
     const boughtBalance = assets.reduce(
@@ -57,7 +62,7 @@ const PortfolioAssetsList = () => {
     const jsonValue = JSON.stringify(newAssets);
     await AsyncStorage.setItem("@portfolio_coins", jsonValue);
     setStorageAssets(newAssets);
-  };
+  }; //this is the function that is called when the user swipes a coin to the left and deletes, removing their coin from the list
 
   const renderDeleteButton = (data) => {
     return (
@@ -75,14 +80,14 @@ const PortfolioAssetsList = () => {
         <FontAwesome name="trash-o" size={24} color="white" />
       </Pressable>
     );
-  };
+  }; //the delete button is rendered when the user swipes a coin to the left with the parameter data
 
   const isChangePositive = () => getCurrentValueChange() >= 0;
 
   return (
     <SwipeListView
       data={assets}
-      renderItem={({ item }) => <PortfolioAssetItem assetItem={item} />}
+      renderItem={({ item }) => <PortfolioAssetsItem assetItem={item} />}
       rightOpenValue={-75}
       disableRightSwipe
       closeOnRowPress
@@ -99,7 +104,7 @@ const PortfolioAssetsList = () => {
               <Text
                 style={{
                   ...styles.valueChange,
-                  color: isChangePositive() ? "#16c784" : "#ea3943",
+                  color: isChangePositive() ? "green" : "red",
                 }}
               >
                 ${getCurrentValueChange()} (All Time)
@@ -108,7 +113,7 @@ const PortfolioAssetsList = () => {
             <View
               style={{
                 ...styles.priceChangePercentageContainer,
-                backgroundColor: isChangePositive() ? "#16c784" : "#ea3943",
+                backgroundColor: isChangePositive() ? "green" : "red",
               }}
             >
               <AntDesign

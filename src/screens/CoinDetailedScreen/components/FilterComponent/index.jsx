@@ -2,8 +2,8 @@ import React, { memo } from "react";
 import { Text, Pressable } from "react-native";
 
 const FilterComponent = (props) => {
+  //FilterComponent is the component that is used to filter the coins
   const { filterDay, filterText, selectedRange, setSelectedRange } = props;
-
   const isFilterSelected = (filter) => filter === selectedRange;
 
   return (

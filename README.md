@@ -1,4 +1,4 @@
-  <h3 align="center">Crypto Tracker - React Native</h3>
+  <h3 align="center" font-size="large">Crypto Tracker - React Native</h3>
 
 <!-- ABOUT THE PROJECT -->
 
@@ -12,9 +12,11 @@ A considerable amount of "documentation" in the form of comments before, after a
 
 - [React Native](https://reactnative.dev/)
 - [Expo Go](https://expo.dev/client)
-- [Animated Charts by Rainbow.me](https://github.com/rainbow-me/react-native-animated-charts)
+- [Recoil](https://recoiljs.org/)
 - [Axios](https://github.com/axios/axios)
 - [React Native Async Storage](https://github.com/react-native-async-storage/async-storage)
+- [react-native-uuid](https://github.com/eugenehp/react-native-uuid)
+- [react-native-wagmi-charts](https://github.com/coinjar/react-native-wagmi-charts)
 
 ## Screenshots
 

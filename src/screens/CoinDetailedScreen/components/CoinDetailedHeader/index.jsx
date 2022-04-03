@@ -5,23 +5,23 @@ import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { useWatchlist } from "../../../../Contexts/WatchlistContext";
 
-//image, symbol, and marketCapRank coming from CoinDetailedScreen
-//this is just for the header of the screen
+//CoinDetailedHeader is the header for the CoinDetailedScreen
 const CoinDetailedHeader = (props) => {
-  //passing in props, doing it this way is cleaner than having props.marketCapRank
   const { coinId, image, symbol, marketCapRank } = props;
-  const navigation = useNavigation(); //using the navigation hook
+  const navigation = useNavigation();
   const { watchlistCoinIds, storeWatchlistCoinId, removeWatchlistCoinId } =
-    useWatchlist(); //using the watchlist hook we created
+    useWatchlist();
 
+  //this function is called when the user presses the add button
   const checkIfCoinIsWatchlisted = () =>
-    watchlistCoinIds.some((coinIdValue) => coinIdValue === coinId); //check if the coin is in the watchlist
+    watchlistCoinIds.some((coinIdValue) => coinIdValue === coinId);
 
+  //this is the function that is called when the user presses the add button
   const handleWatchlistCoin = () => {
     if (checkIfCoinIsWatchlisted()) {
-      return removeWatchlistCoinId(coinId); //remove the coin from the watchlist
+      return removeWatchlistCoinId(coinId);
     }
-    return storeWatchlistCoinId(coinId); //add the coin to the watchlist
+    return storeWatchlistCoinId(coinId);
   };
 
   return (
@@ -42,9 +42,9 @@ const CoinDetailedHeader = (props) => {
         </View>
       </View>
       <FontAwesome
-        name={checkIfCoinIsWatchlisted() ? "star" : "star-o"} //if the coin is in the watchlist, show the star icon
+        name={checkIfCoinIsWatchlisted() ? "star" : "star-o"}
         size={25}
-        color={checkIfCoinIsWatchlisted() ? "#FFBF00" : "white"} //if the coin is in the watchlist, change the color
+        color={checkIfCoinIsWatchlisted() ? "#FFBF00" : "white"}
         onPress={handleWatchlistCoin}
       />
     </View>

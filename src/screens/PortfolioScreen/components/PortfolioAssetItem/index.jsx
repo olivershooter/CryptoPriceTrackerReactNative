@@ -1,31 +1,35 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import styles from "./styles.js";
+import styles from "./styles";
 import { AntDesign } from "@expo/vector-icons";
 
-const PortfolioAssetItem = ({ assetItem }) => {
+const PortfolioAssetsItem = ({ assetItem }) => {
   const {
     currentPrice,
     image,
     name,
-    quantityBought,
     priceChangePercentage,
+    quantityBought,
     ticker,
-  } = assetItem;
+  } = assetItem; //assetItem is the object that is passed in from PortfolioScreen as a prop and it contains the data for the coin
 
+  //rather than having code everywhere, create a new function that can be used in multiple places
   const isChangePositive = () => priceChangePercentage >= 0;
 
   const renderHoldings = () => (quantityBought * currentPrice).toFixed(2);
 
   return (
     <View style={styles.coinContainer}>
-      <Image source={{ uri: image }} style={styles.coinImage} />
+      <Image
+        source={{ uri: image }}
+        style={{ height: 30, width: 30, marginRight: 10, alignSelf: "center" }}
+      />
       <View>
         <Text style={styles.title}>{name}</Text>
         <Text style={styles.ticker}>{ticker}</Text>
       </View>
       <View style={{ marginLeft: "auto", alignItems: "flex-end" }}>
-        <Text style={styles.title}>${currentPrice}</Text>
+        <Text style={styles.title}>{currentPrice}</Text>
         <View style={{ flexDirection: "row" }}>
           <AntDesign
             name={isChangePositive() ? "caretup" : "caretdown"}
@@ -39,7 +43,7 @@ const PortfolioAssetItem = ({ assetItem }) => {
               fontWeight: "600",
             }}
           >
-            {priceChangePercentage?.toFixed(2)}%
+            {priceChangePercentage?.toFixed(2)}
           </Text>
         </View>
       </View>
@@ -53,4 +57,4 @@ const PortfolioAssetItem = ({ assetItem }) => {
   );
 };
 
-export default PortfolioAssetItem;
+export default PortfolioAssetsItem;

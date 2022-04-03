@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, RefreshControl } from "react-native";
+import { View, Text, FlatList, RefreshControl } from "react-native";
 import { useWatchlist } from "../../Contexts/WatchlistContext";
 import CoinItem from "../../components/CoinItem";
 import { getWatchlistedCoins } from "../../services/requests";
 
-const WatchListScreen = () => {
-  const { watchlistCoinIds } = useWatchlist();
+const WatchlistScreen = () => {
+  const { watchlistCoinIds } = useWatchlist(); //our hook we created from the context
 
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const transformCoinIds = () => watchlistCoinIds.join("%2C");
+  const transformCoinIds = () => watchlistCoinIds.join("%2C"); //simple function that .join()s the coin ids
 
-  const fetchWatchListedCoins = async () => {
+  //fetching the watchlisted coins
+  const fetchWatchlistedCoins = async () => {
     if (loading) {
       return;
     }
     setLoading(true);
     const watchlistedCoinsData = await getWatchlistedCoins(
       1,
-      transformCoinIds()
+      transformCoinIds() //making sure to transform the incoming API call
     );
-    setCoins(watchlistedCoinsData);
+    setCoins(watchlistedCoinsData); //setting the coins to the watchlisted coins
     setLoading(false);
   };
 
   useEffect(() => {
     if (watchlistCoinIds.length > 0) {
-      fetchWatchListedCoins();
+      fetchWatchlistedCoins();
     }
-  }, [watchlistCoinIds]);
+  }, [watchlistCoinIds]); //mounts the component and fetches the coins, but when the watchlistCoinIds changes, it will re-fetch the coins
 
   return (
     <FlatList
@@ -39,11 +40,11 @@ const WatchListScreen = () => {
         <RefreshControl
           refreshing={loading}
           tintColor="white"
-          onRefresh={fetchWatchListedCoins}
+          onRefresh={watchlistCoinIds.length > 0 ? fetchWatchlistedCoins : null}
         />
       }
     />
   );
 };
 
-export default WatchListScreen;
+export default WatchlistScreen;
