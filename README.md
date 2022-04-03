@@ -1,4 +1,4 @@
-  <h6 align="center" >Crypto Tracker - React Native</h3>
+  <h1 align="center" >Crypto Tracker - React Native</h3>
 
 <!-- ABOUT THE PROJECT -->
 
