@@ -20,8 +20,8 @@ A considerable amount of "documentation" in the form of comments before, after a
 
 ## Screenshots
 
-<img src="assets\screenshots\addasset.png" alt="addasset" width="175"/>
-<img src="assets\screenshots\coindetails.png" alt="addasset" width="175"/>
+<img src="assets\screenshots\addasset.png" alt="addasset" width="175"/><img src="assets\screenshots\coindetails.png" alt="addasset" width="175"/>
+
 <img src="assets\screenshots\homescreen.png" alt="addasset" width="175"/>
 <img src="assets\screenshots\watchlist.png" alt="addasset" width="175"/>
 
@@ -40,4 +40,4 @@ Simply fork or clone the repo.
 
 ## Contact
 
-[Oliver Shooter](https://www.olivershooter.me/)
+[olivershooter.me](https://www.olivershooter.me/)
