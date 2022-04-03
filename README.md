@@ -8,6 +8,8 @@ Built following along with the wonderful [notJust.dev](https://www.youtube.com/c
 
 A considerable amount of "documentation" in the form of comments before, after and sometimes in the middle of functions. This is for my own learning and thus might be considered ugly and/or fluff by a lot of people better than I. Idea is, if I can explain it I know it.
 
+<br>
+
 ### Built With
 
 - [React Native](https://reactnative.dev/)
@@ -18,16 +20,20 @@ A considerable amount of "documentation" in the form of comments before, after a
 - [react-native-uuid](https://github.com/eugenehp/react-native-uuid)
 - [react-native-wagmi-charts](https://github.com/coinjar/react-native-wagmi-charts)
 
+<br>
+
 ## Screenshots
 
 <img src="assets\screenshots\addasset.png" alt="addasset" width="175"/><img src="assets\screenshots\coindetails.png" alt="addasset" width="175"/>
+<img src="assets\screenshots\homescreen.png" alt="addasset" width="175"/><img src="assets\screenshots\watchlist.png" alt="addasset" width="175"/>
 
-<img src="assets\screenshots\homescreen.png" alt="addasset" width="175"/>
-<img src="assets\screenshots\watchlist.png" alt="addasset" width="175"/>
+<br>
 
 ## Getting Started
 
 Simply fork or clone the repo.
+
+<br>
 
 ## Future improvements
 
@@ -38,6 +44,6 @@ Simply fork or clone the repo.
 <br>
 <br>
 
-## Contact
+### Contact
 
 [olivershooter.me](https://www.olivershooter.me/)
